@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken')
+import jwt from 'jsonwebtoken'
 const { User } = require('../models')
 
 if (process.env.NODE_ENV === 'development') {
@@ -35,8 +35,8 @@ class Authentication {
     }
   }
   async authAdmin(req, res, next) {
-    const authHeader = req.header('auth-token')
-    const idUser = req.header('user_id')
+    const authHeader = await req.header('auth-token')
+    const idUser = await req.header('user_id')
 
     if (!authHeader) {
       return res.status(401).json({ message: 'Token not provided' })
@@ -45,7 +45,7 @@ class Authentication {
     if (!idUser) {
       return res.status(401).json({ message: 'Undefined id User Admin' })
     } else {
-      const user = await User.findOne({
+      const user = await User.findAll({
         where: {
           id: idUser,
           admin: true,
