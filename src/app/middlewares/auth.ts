@@ -45,13 +45,12 @@ class Authentication {
     if (!idUser) {
       return res.status(401).json({ message: 'Undefined id User Admin' })
     } else {
-      const user = await User.findAll({
+      const user = await User.findOne({
         where: {
           id: idUser,
-          admin: true,
         },
       })
-      if (!user) {
+      if (user.admin == false) {
         return res.status(401).json({ message: 'User not Admin' })
       }
     }
