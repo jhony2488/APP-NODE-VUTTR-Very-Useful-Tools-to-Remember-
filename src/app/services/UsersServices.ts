@@ -15,33 +15,25 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 class UsersServices {
-  async index(id_users: string, tag: string = '') {
-    let user
-    if (tag == '') {
-      user = await User.findOne({
-        where: {
-          id: id_users,
+  async index(id_users: string) {
+    const user = await User.findOne({
+      where: {
+        id: id_users,
+      },
+      include: [
+        {
+          association: 'tools',
+          order: [['id', 'DESC']],
+          include: [
+            {
+              association: 'ToolTag',
+              order: [['id', 'DESC']],
+              attributes: ['id', 'title', 'slug', 'createdAt', 'updatedAt'],
+            },
+          ],
         },
-        include: [
-          {
-            association: 'tools',
-            order: [['id', 'DESC']],
-          },
-        ],
-      })
-    } else {
-      user = await User.findOne({
-        where: {
-          id: id_users,
-        },
-        include: [
-          {
-            association: 'tools',
-            order: [['id', 'DESC']],
-          },
-        ],
-      })
-    }
+      ],
+    })
 
     return user
   }

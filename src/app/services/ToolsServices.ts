@@ -36,6 +36,7 @@ class ToolsServices {
           {
             association: 'ToolTag',
             order: [['id', 'DESC']],
+            attributes: ['id', 'title', 'slug', 'createdAt', 'updatedAt'],
           },
         ],
       })
@@ -52,6 +53,7 @@ class ToolsServices {
       }
       return {
         next,
+        count: result.tools.rows.length,
         page: parseInt(result.page),
         tools: result.tools.rows,
       }
@@ -74,6 +76,14 @@ class ToolsServices {
               'description',
               'createdAt',
               'updatedAt',
+              'ToolTag',
+            ],
+            include: [
+              {
+                association: 'ToolTag',
+                order: [['id', 'DESC']],
+                attributes: ['id', 'title', 'slug', 'createdAt', 'updatedAt'],
+              },
             ],
             where: {
               user_id: id_users,

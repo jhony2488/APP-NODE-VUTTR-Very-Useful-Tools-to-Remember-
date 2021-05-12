@@ -49,6 +49,9 @@
     "./src/app/***",
     "./src/config/***",
     "./src/database/migrations/*",
-    "./src/database/seeders/*"
-, "tests"  ]
+    "./src/database/seeders/*",
+  ],
+  "exclude": [
+    "__tests__/****",
+  ]
 }

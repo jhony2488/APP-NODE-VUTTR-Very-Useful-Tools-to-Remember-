@@ -1,0 +1,1492 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "api-node-vuttr-very-useful-tools-to-remember",
+    "description": ""
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "default",
+      "description": "Endpoints of default endpoints"
+    },
+    {
+      "name": "Admin",
+      "description": "Endpoints of admin"
+    },
+    {
+      "name": "Users",
+      "description": "Endpoints of users"
+    },
+    {
+      "name": "Tools",
+      "description": "Endpoints of tools"
+    },
+    {
+      "name": "Tags",
+      "description": "Endpoints of tags"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "auth-token",
+      "in": "header"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "description": "Endpoint para ver a versão desta API",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/DefaultIndex"
+            },
+            "description": "Mostra a versão desta API"
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      }
+    },
+    "/users/{id_users}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Endpoint para obter os dados de um usuário.",
+        "parameters": [
+          {
+            "name": "id_users",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do usuário."
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "description": "Pegar informações de um único usuário"
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Endpoint para alterar os dados de um usuário.",
+        "parameters": [
+          {
+            "name": "id_users",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do usuário."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dado necessario para alterar nome e email de um usuário",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/UpdateTagResponse"
+            },
+            "description": "Realiza a alteração dos dados de um único usuário"
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          },
+          "418": {
+            "description": "Quando o cliente fornecer email que já esta cadastrado por outro usuário",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Endpoint para deletar um usuário.",
+        "parameters": [
+          {
+            "name": "id_users",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do usuário."
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Delete"
+            },
+            "description": "Realiza a exclusão de um único usuário"
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Endpoint para realização do login de um usuário.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dado necessario para se realizar o login de um usuário",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/LoginUserResponse"
+            },
+            "description": "Realiza o login de um usuário retornando os dados neccessarios para isto"
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          },
+          "406": {
+            "description": "Quando o cliente fornecer uma senha ou um email incorreto",
+            "schema": {
+              "$ref": "#/definitions/Error406"
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Endpoint para criação de um usuário.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dado necessario para adicionar um novo usuário",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/CreateUserResponse"
+            },
+            "description": "Realiza a criação de um usuário"
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          },
+          "406": {
+            "description": "Quando o cliente fornecer email que já esta cadastrado por outro usuário",
+            "schema": {
+              "$ref": "#/definitions/Error406"
+            }
+          }
+        }
+      }
+    },
+    "/users/redefined_password/{id_users}": {
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Endpoint para redefinir senha de um usuário.",
+        "parameters": [
+          {
+            "name": "id_users",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do usuário."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dado necessario para alterar a senha de um usuário",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdatePasswordUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/UpdateTagResponse"
+            },
+            "description": "Realiza a alteração da senha de um único usuário"
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      }
+    },
+    "/tools/users/{id_users}": {
+      "get": {
+        "tags": [
+          "Tools"
+        ],
+        "description": "Endpoint para obter todas as ferramentas de um usuário.",
+        "parameters": [
+          {
+            "name": "id_users",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do usuário."
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "nome da tag, para se fazer a pesquisa de quais ferramentas possuem a tag enviada",
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "paramêtro de paginação",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/GetTools"
+            },
+            "description": "Obter todas as ferramentas de um único usuário"
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Tools"
+        ],
+        "description": "Endpoint para criar uma ferramenta de um usuário.",
+        "parameters": [
+          {
+            "name": "id_users",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do usuário."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dado necessario para adicionar uma nova ferramenta",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateTools"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/CreateToolResponse"
+            },
+            "description": "Criar uma ferramentas de um usuário"
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          },
+          "403": {
+            "description": "Quando um usuario que não existe tenta criar uma ferramenta",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          }
+        }
+      }
+    },
+    "/tools/{id_tools}/users/{id_users}": {
+      "put": {
+        "tags": [
+          "Tools"
+        ],
+        "description": "Endpoint para alterar dados de uma ferramenta de um usuário.",
+        "parameters": [
+          {
+            "name": "id_tools",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID da ferramenta."
+          },
+          {
+            "name": "id_users",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do usuário."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dado necessario para alterar os dados de uma ferramenta",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateTools"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/UpdateToolResponse"
+            },
+            "description": "Alterar dados de uma ferramentas de um usuário"
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          },
+          "403": {
+            "description": "Quando o usuario ou a ferramenta não for encontrada",
+            "schema": {
+              "$ref": "#/definitions/Error403"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tools"
+        ],
+        "description": "Endpoint para deletar uma ferramenta de um usuário.",
+        "parameters": [
+          {
+            "name": "id_tools",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID da ferramenta."
+          },
+          {
+            "name": "id_users",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do usuário."
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Delete"
+            },
+            "description": "Deletar Usuário"
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          },
+          "406": {
+            "description": "Quando os dados fornecidos não alcancarem a expectativa",
+            "schema": {
+              "$ref": "#/definitions/Error406"
+            }
+          }
+        }
+      }
+    },
+    "/tags": {
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "description": "Endpoint para obter todas as tags já criadas.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "paramêtro de paginação",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/GetTags"
+            },
+            "description": "Obter todas as tags"
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Tags"
+        ],
+        "description": "Endpoint para criar uma tag",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dado necessario para adicionar uma nova tag",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateTags"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/CreateTagResponse"
+            },
+            "description": "Criar uma nova tag"
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      }
+    },
+    "/tags/{id_tag}": {
+      "put": {
+        "tags": [
+          "Tags"
+        ],
+        "description": "Endpoint para alterar uma tag",
+        "parameters": [
+          {
+            "name": "id_tag",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id da tag"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dado necessario para alterar dados de uma tag",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateTags"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/UpdateTagResponse"
+            },
+            "description": "Alterar dados de uma tag"
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tags"
+        ],
+        "description": "Endpoint para deletar uma tag",
+        "parameters": [
+          {
+            "name": "id_tag",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "id da tag"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Delete"
+            },
+            "description": "Deletar uma tag"
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorTokenInvalid"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado"
+          }
+        }
+      }
+    },
+    "/admin/users": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "Endpoint para obter os dados de todos os usuarios",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "paramêtro de paginação",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/AdminUserGet"
+            },
+            "description": "Pega os dados de todos os usuários"
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorAdmin"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado ou quando o usuário não foi encontrado ou quando o id do usuário está indefinido ou quando o usuário não e admin"
+          }
+        }
+      }
+    },
+    "/admin/users/{id_users}": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "Endpoint para obter os dados de um único usuario",
+        "parameters": [
+          {
+            "name": "id_users",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do usuário."
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/AdminGetUserUnic"
+            },
+            "description": "Pega os dados de um único usuario"
+          },
+          "400": {
+            "description": "Quando houver um erro na requisição",
+            "schema": {
+              "$ref": "#/definitions/Error400"
+            }
+          },
+          "401": {
+            "schema": {
+              "$ref": "#/definitions/ErrorAdmin"
+            },
+            "description": "Quando o token de authenticação não for valido ou quando o token de authenticação não for encontrado ou quando o usuário não foi encontrado ou quando o id do usuário está indefinido ou quando o usuário não e admin"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error400": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Descrição sobre o erro"
+        }
+      }
+    },
+    "Error406": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Descrição sobre o erro"
+        }
+      }
+    },
+    "Error403": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Descrição sobre o erro"
+        }
+      }
+    },
+    "ErrorTokenInvalid": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Token Invalid || Token not provided"
+        }
+      }
+    },
+    "ErrorAdmin": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Undefined id User Admin || User not Admin || Token Invalid || Token not provided"
+        }
+      }
+    },
+    "DefaultIndex": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "example": "1.0.0"
+        }
+      }
+    },
+    "AdminUserGet": {
+      "type": "object",
+      "properties": {
+        "next": {
+          "type": "boolean",
+          "example": false
+        },
+        "page": {
+          "type": "number",
+          "example": 1
+        },
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number",
+                "example": 1
+              },
+              "uuid": {
+                "type": "string",
+                "example": "a7e36cda-1e6d-41d5-9771-3cf032bde15e"
+              },
+              "admin": {
+                "type": "boolean",
+                "example": true
+              },
+              "name": {
+                "type": "string",
+                "example": "Jhony Araujo"
+              },
+              "email": {
+                "type": "string",
+                "example": "jhon.araujo2488@gmail.com"
+              },
+              "password_hash": {
+                "type": "string",
+                "example": "$2a$10$p2H0aNDzIMX5iP4J3KAxUey/itKKDuiOjH2iRfO4b4XkychAByhSO"
+              },
+              "createdAt": {
+                "type": "string",
+                "example": "2021-05-03T17:33:45.000Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "example": "2021-05-05T17:37:35.000Z"
+              }
+            }
+          }
+        }
+      }
+    },
+    "AdminGetUserUnic": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "uuid": {
+          "type": "string",
+          "example": "a7e36cda-1e6d-41d5-9771-3cf032bde15e"
+        },
+        "admin": {
+          "type": "boolean",
+          "example": true
+        },
+        "name": {
+          "type": "string",
+          "example": "Jhony Araujo"
+        },
+        "email": {
+          "type": "string",
+          "example": "jhon.araujo2488@gmail.com"
+        },
+        "password_hash": {
+          "type": "string",
+          "example": "$2a$10$p2H0aNDzIMX5iP4J3KAxUey/itKKDuiOjH2iRfO4b4XkychAByhSO"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2021-05-03T17:33:45.000Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2021-05-05T17:37:35.000Z"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "uuid": {
+          "type": "string",
+          "example": "a7e36cda-1e6d-41d5-9771-3cf032bde15e"
+        },
+        "admin": {
+          "type": "boolean",
+          "example": true
+        },
+        "name": {
+          "type": "string",
+          "example": "Jhony Araujo"
+        },
+        "email": {
+          "type": "string",
+          "example": "jhon.araujo2488@gmail.com"
+        },
+        "password_hash": {
+          "type": "string",
+          "example": "$2a$10$p2H0aNDzIMX5iP4J3KAxUey/itKKDuiOjH2iRfO4b4XkychAByhSO"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2021-05-03T17:33:45.000Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2021-05-05T17:37:35.000Z"
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number",
+                "example": 3
+              },
+              "title": {
+                "type": "string",
+                "example": "carbonita"
+              },
+              "link": {
+                "type": "string",
+                "example": "https://carbon.now.sh/"
+              },
+              "description": {
+                "type": "string",
+                "example": "description"
+              },
+              "createdAt": {
+                "type": "string",
+                "example": "2021-05-04T17:49:28.000Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "example": "2021-05-04T17:49:28.000Z"
+              },
+              "ToolTag": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "node do jhony"
+                    },
+                    "slug": {
+                      "type": "string",
+                      "example": "node-do-jhony"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2021-05-03T17:33:58.000Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2021-05-04T18:17:15.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "AddUser": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Jhonata Vinicius Da Silva Araujo"
+        },
+        "email": {
+          "type": "string",
+          "example": "jhon.araujo2488@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "jhonyaraujo"
+        },
+        "codeSecret": {
+          "type": "string",
+          "example": "Ew%zXXq>Zk.8HhjkhK:&fjkh56+ZS^bjk%yw*$0Wn5(TUFr@B*N;qWApCfL8hjgh"
+        }
+      },
+      "required": [
+        "name",
+        "email",
+        "password"
+      ]
+    },
+    "UpdateUser": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Jhony Araujo"
+        },
+        "email": {
+          "type": "string",
+          "example": "jhon.araujo2488@gmail.com"
+        },
+        "codeSecret": {
+          "type": "string",
+          "example": "Ew%zXXqjljlj>Zk.8HK:&f56+ZS^%yw*$0Wnnjbjk5(TUFr@xdfsfeB*N;qWAmkljljpCfL8"
+        }
+      },
+      "required": [
+        "name",
+        "email"
+      ]
+    },
+    "UpdatePasswordUser": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "example": "jhonyaraujo"
+        }
+      },
+      "required": [
+        "password"
+      ]
+    },
+    "LoginUser": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "jhon.araujo2488@gmail.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "jhonyaraujo"
+        }
+      },
+      "required": [
+        "email",
+        "password"
+      ]
+    },
+    "GetTools": {
+      "type": "object",
+      "properties": {
+        "next": {
+          "type": "boolean",
+          "example": false
+        },
+        "count": {
+          "type": "number",
+          "example": 1
+        },
+        "page": {
+          "type": "number",
+          "example": 1
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number",
+                "example": 3
+              },
+              "title": {
+                "type": "string",
+                "example": "carbonita"
+              },
+              "link": {
+                "type": "string",
+                "example": "https://carbon.now.sh/"
+              },
+              "description": {
+                "type": "string",
+                "example": "description"
+              },
+              "createdAt": {
+                "type": "string",
+                "example": "2021-05-04T17:49:28.000Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "example": "2021-05-04T17:49:28.000Z"
+              },
+              "ToolTag": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "node do jhony"
+                    },
+                    "slug": {
+                      "type": "string",
+                      "example": "node-do-jhony"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2021-05-03T17:33:58.000Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2021-05-04T18:17:15.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "CreateTools": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "carbonita9.0"
+        },
+        "link": {
+          "type": "string",
+          "example": "https://carbon.now.sh/"
+        },
+        "description": {
+          "type": "string",
+          "example": "description"
+        },
+        "title_tags": {
+          "type": "array",
+          "example": [
+            "angular.js"
+          ],
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "title",
+        "link",
+        "description",
+        "title_tags"
+      ]
+    },
+    "UpdateTools": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "carbonita2"
+        },
+        "link": {
+          "type": "string",
+          "example": "https://carbon.now.sh2/"
+        },
+        "description": {
+          "type": "string",
+          "example": "description2"
+        },
+        "title_tags": {
+          "type": "array",
+          "example": [
+            "vue.js"
+          ],
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "title",
+        "link",
+        "description",
+        "title_tags"
+      ]
+    },
+    "GetTags": {
+      "type": "object",
+      "properties": {
+        "next": {
+          "type": "boolean",
+          "example": false
+        },
+        "page": {
+          "type": "number",
+          "example": 1
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number",
+                "example": 1
+              },
+              "title": {
+                "type": "string",
+                "example": "node js"
+              },
+              "slug": {
+                "type": "string",
+                "example": "node-js"
+              },
+              "createdAt": {
+                "type": "string",
+                "example": "2021-05-03T17:33:58.000Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "example": "2021-05-04T18:17:15.000Z"
+              }
+            }
+          }
+        }
+      }
+    },
+    "CreateTags": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "node js"
+        }
+      }
+    },
+    "Delete": {
+      "type": "object",
+      "properties": {}
+    },
+    "CreateTagResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "title": {
+          "type": "string",
+          "example": "node js"
+        },
+        "slug": {
+          "type": "string",
+          "example": "node-js"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2021-05-04T18:14:23.136Z"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2021-05-04T18:14:23.136Z"
+        }
+      }
+    },
+    "CreateToolResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "title": {
+          "type": "string",
+          "example": "carbonita9.0"
+        },
+        "link": {
+          "type": "string",
+          "example": "https://carbon.now.sh/"
+        },
+        "description": {
+          "type": "string",
+          "example": "description"
+        },
+        "user_id": {
+          "type": "string",
+          "example": "1"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2021-05-04T18:43:59.621Z"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2021-05-04T18:43:59.621Z"
+        }
+      }
+    },
+    "CreateUserResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "uuid": {
+          "type": "string",
+          "example": "15e787583-4059-48ae-90c8-5848932f3a6e"
+        },
+        "name": {
+          "type": "string",
+          "example": "Jhonata Vinicius Da Silva Araujo"
+        },
+        "email": {
+          "type": "string",
+          "example": "jhon.araujo248088@gmail.com"
+        },
+        "password_hash": {
+          "type": "string",
+          "example": "$2a$10$b5FXyMdzZYarwZvh/YzUh.16TXXtUan9LTbMtp/mt1iwRs/UDwhKa"
+        },
+        "admin": {
+          "type": "boolean",
+          "example": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2021-05-05T17:37:55.931Z"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2021-05-05T17:37:55.931Z"
+        }
+      }
+    },
+    "LoginUserResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "token": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXVpZCI6ImUwY2FhNGIwLWNjNDctNGRjMi04ZmQ2LTcyZGQwNGI2YTI4MiIsImlhdCI6MTYyMDA1NzI1MH0.yqOa-dUz1yK1nIHTH0UdGR6K8vVCfpcbVZ3XPFVS7oc"
+            },
+            "id": {
+              "type": "number",
+              "example": 1
+            },
+            "uuid": {
+              "type": "string",
+              "example": "e0caa4b0-cc47-4dc2-8fd6-72dd04b6a282"
+            }
+          }
+        }
+      }
+    },
+    "UpdateTagResponse": {
+      "type": "array",
+      "example": [
+        1
+      ],
+      "items": {
+        "type": "number"
+      }
+    },
+    "UpdateToolResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number",
+          "example": 1
+        },
+        "title": {
+          "type": "string",
+          "example": "carbonita2"
+        },
+        "link": {
+          "type": "string",
+          "example": "https://carbon.now.sh2/"
+        },
+        "description": {
+          "type": "string",
+          "example": "description2"
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2021-05-03T17:33:58.000Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2021-05-04T18:05:55.000Z"
+        },
+        "user_id": {
+          "type": "number",
+          "example": 1
+        },
+        "ToolTag": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number",
+                "example": 4
+              },
+              "title": {
+                "type": "string",
+                "example": "vue.js"
+              },
+              "slug": {
+                "type": "string",
+                "example": "vue.js"
+              },
+              "createdAt": {
+                "type": "string",
+                "example": "2021-05-04T17:49:28.000Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "example": "2021-05-04T17:49:28.000Z"
+              },
+              "tools_tags": {
+                "type": "object",
+                "properties": {
+                  "createdAt": {
+                    "type": "string",
+                    "example": "2021-05-04T18:05:29.000Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "example": "2021-05-04T18:05:29.000Z"
+                  },
+                  "tag_id": {
+                    "type": "number",
+                    "example": 4
+                  },
+                  "tool_id": {
+                    "type": "number",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

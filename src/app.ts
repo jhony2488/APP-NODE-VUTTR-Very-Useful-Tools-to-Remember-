@@ -2,7 +2,8 @@ export {}
 
 import express from 'express'
 import bodyParser from 'body-parser'
-
+import swaggerUi from 'swagger-ui-express'
+const swaggerFile = require('../swagger_output.json')
 
 class AppController {
   public express
@@ -13,6 +14,7 @@ class AppController {
     this.bodyParser()
     this.middleware()
     this.routes()
+    this.documemtation()
   }
   middleware() {
     this.express.use(express.json())
@@ -23,6 +25,13 @@ class AppController {
   bodyParser() {
     this.express.use(bodyParser.urlencoded({ extended: false }))
     this.express.use(bodyParser.json())
+  }
+  documemtation() {
+    this.express.use(
+      '/documentation',
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerFile)
+    )
   }
   server() {
     this.express.listen(3000, () => {

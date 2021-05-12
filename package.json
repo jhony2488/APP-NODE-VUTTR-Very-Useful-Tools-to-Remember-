@@ -19,7 +19,8 @@
     "run-migrations": "sequelize db:migrate",
     "undo-migrations-test": "NODE_ENV=test sequelize db:migrate:undo:all",
     "undo-migrations-dev": "NODE_ENV=development sequelize db:migrate:undo:all",
-    "undo-migrations": "sequelize db:migrate:undo:all"
+    "undo-migrations": "sequelize db:migrate:undo:all",
+    "documentation": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register --respawn --ignore-watch node_modules --no-notify ./swagger.ts"
   },
   "author": "Jhonata Vinicius",
   "license": " GNU GENERAL PUBLIC LICENSE",
@@ -40,6 +41,7 @@
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.2.5",
     "nodemailer": "^6.4.17",
+    "project-version": "^2.0.0",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.6.2",
     "sequelize-typescript": "^2.0.0",
@@ -63,6 +65,8 @@
     "prettier": "^2.1.2",
     "sequelize-cli": "^6.2.0",
     "supertest": "^6.1.3",
+    "swagger-autogen": "^2.8.1",
+    "swagger-ui-express": "^4.1.6",
     "ts-jest": "^26.5.4",
     "ts-node-dev": "^1.0.0",
     "tsconfig-paths": "^3.9.0",
