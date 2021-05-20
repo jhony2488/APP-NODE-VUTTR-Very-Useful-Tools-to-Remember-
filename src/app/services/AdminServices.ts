@@ -1,15 +1,5 @@
 const { User } = require('../models')
 
-if (process.env.NODE_ENV === 'development') {
-  require('dotenv').config({
-    path: '.env.development',
-  })
-} else {
-  require('dotenv').config({
-    path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
-  })
-}
-
 class AdminServices {
   async index(pagGet = 1) {
     let page
