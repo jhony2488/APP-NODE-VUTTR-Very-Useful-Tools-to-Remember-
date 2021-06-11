@@ -90,16 +90,7 @@ $ npm install || yarn add
 
 ```
 
-<h3 id="rodando-api">🎲 Rodando a API com docker</h3>
-
-```bash
-# Execute a aplicação com docker
-$ npm run start-docker || yarn start-docker
-
-# O servidor inciará na porta:3000 - acesse <http://localhost:3000>
-```
-
-<h3 id="rodando-api">🎲 Rodando a API em modo de desenvolvimento sem o docker</h3>
+<h3 id="rodando-api">🎲 Rodando a API em modo de desenvolvimentor</h3>
 
 #### Instale o Node.js atravez do link abaixo caso ainda não o tenha instalado
 
@@ -122,7 +113,7 @@ $ npm run dev || yarn dev
 # O servidor inciará na porta:3000 - acesse <http://localhost:3000>
 ```
 
-<h3 id="rodando-api">🎲 Rodando a API em modo de produção sem o docker</h3>
+<h3 id="rodando-api">🎲 Rodando a API em modo de produção </h3>
 
 #### Instale o Node.js atravez do link abaixo caso ainda não o tenha instalado
 
@@ -148,18 +139,7 @@ $ npm run start || yarn start
 # O servidor inciará na porta:3000 - acesse <http://localhost:3000>
 ```
 
-<h2 id="tests">🛠 Testes com docker</h2>
-
-```bash
-# Executar os testes
-$ npm run test || yarn test
-
-# Executar testes de estresse na API
-$ npm run test-stress || yarn test-stress
-
-```
-
-<h2 id="tests">🛠 Testes sem o docker</h2>
+<h2 id="tests">🛠 Testes</h2>
 
 ### Instale o Node.js atravez do link abaixo caso ainda não o tenha instalado
 
@@ -197,7 +177,7 @@ $ npm run documentation || yarn documentation
 
 Caso a aplicação já esteja sendo executada com docker basta acessar sem precisar executar o comando acima - <http://localhost:3000/documentation/>
 
-### Acesse a documentação da API em produção
+### Acesse a documentação da localmente
 
 - [http://localhost:3000/documentation/](http://localhost:3000/documentation/)
 
@@ -206,7 +186,6 @@ Caso a aplicação já esteja sendo executada com docker basta acessar sem preci
 As seguintes ferramentas foram usadas na construção do projeto:
 
 - [Node.js](https://nodejs.org/en/)
-- [Docker](https://www.docker.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Express.js](https://expressjs.com/pt-br/)
 - [Sequelize](https://sequelize.org/)
