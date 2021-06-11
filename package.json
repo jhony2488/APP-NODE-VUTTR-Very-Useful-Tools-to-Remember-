@@ -20,8 +20,7 @@
     "undo-migrations-test": "NODE_ENV=test sequelize db:migrate:undo:all",
     "undo-migrations-dev": "NODE_ENV=development sequelize db:migrate:undo:all",
     "undo-migrations": "sequelize db:migrate:undo:all",
-    "documentation": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register --respawn --ignore-watch node_modules --no-notify ./swagger.ts",
-    "start-docker": "docker-compose up"
+    "documentation": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register --respawn --ignore-watch node_modules --no-notify ./swagger.ts"
   },
   "author": "Jhonata Vinicius",
   "license": " GNU GENERAL PUBLIC LICENSE",

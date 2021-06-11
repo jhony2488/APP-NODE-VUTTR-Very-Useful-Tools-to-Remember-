@@ -46,7 +46,7 @@
 
 - [x] Desenvolver e realizar os testes
 - [] containerizar a aplicação
-- [] Aplicar CI/CD na aplicacao e realizar o build em ambiente de produção
+- [] Aplicar CI/CD na aplicação e realizar o build em ambiente de produção
 - [x] Cadastro de usuário
 - [x] Pegar dados de um unico usuario
 - [x] Alterar dados de usuário
@@ -105,7 +105,7 @@ $ npm run start-docker || yarn start-docker
 
 - [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 
-#### Instale o MyySQL atravez do link abaixo caso ainda não o tenha instalado
+#### Instale o MSQL atravez do link abaixo caso ainda não o tenha instalado
 
 - [https://www.mysql.com/downloads/](https://www.mysql.com/downloads/)
 
@@ -128,7 +128,7 @@ $ npm run dev || yarn dev
 
 - [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 
-#### Instale o MyySQL atravez do link abaixo caso ainda não o tenha instalado
+#### Instale o MySQL atravez do link abaixo caso ainda não o tenha instalado
 
 - [https://www.mysql.com/downloads/](https://www.mysql.com/downloads/)
 
@@ -165,7 +165,7 @@ $ npm run test-stress || yarn test-stress
 
 - [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 
-### Instale o MyySQL atravez do link abaixo caso ainda não o tenha instalado
+### Instale o MySQL atravez do link abaixo caso ainda não o tenha instalado
 
 - [https://www.mysql.com/downloads/](https://www.mysql.com/downloads/)
 
@@ -195,7 +195,9 @@ $ npm run documentation || yarn documentation
 # O servidor inciará na porta:3000 - acesse a documentação <http://localhost:3000/documentation/>
 ```
 
-# Acesse a documentação da API em produção
+Caso a aplicação já esteja sendo executada com docker basta acessar sem precisar executar o comando acima - <http://localhost:3000/documentation/>
+
+### Acesse a documentação da API em produção
 
 - [http://localhost:3000/documentation/](http://localhost:3000/documentation/)
 
