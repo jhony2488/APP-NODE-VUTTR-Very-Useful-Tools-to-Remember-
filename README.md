@@ -15,8 +15,6 @@
 
 - [Features](#----features)
 
-- [Demonstração da aplicação](#----demonstração-da-aplicação)
-
 - [Como usar](#como-usar)
 
   - [Pre Requisitos](#pré-requisitos)
@@ -60,11 +58,6 @@
 - [x] cadastro de usuario administrador
 - [x] Admninistrador pegar dados de um unico usuario
 - [x] Admninistrador pegar dados de todos os usuarios
-
-<h2 id="app-demo">  
-  Demonstração da API
-</h2>
-<a href="#" align="center">Link Da API</a>
 
 <h2>Como usar</h2>
 
