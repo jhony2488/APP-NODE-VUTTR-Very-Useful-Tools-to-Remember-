@@ -200,7 +200,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 <a href="https://www.linkedin.com/in/jhonatavinicius2488/"><img src="https://raw.githubusercontent.com/jhony2488/images/master/linkedin.png" style="margin-left:10px;" height="60px" width="60px" /></a>
 <a href="https://join.skype.com/invite/v9azzgZrhpWh"><img src="https://raw.githubusercontent.com/jhony2488/images/master/skype%20(1).png" height="60px" width="60px" /></a>
 <a href="https://www.facebook.com/jhony.araujo.dev/"><img src="https://raw.githubusercontent.com/jhony2488/images/master/facebook%20(1).png" height="60px" width="60px" /></a>
-<a href="https://www.instagram.com/jhony_araujo.dev/"><img src="https://raw.githubusercontent.com/jhony2488/images/master/instagram.png" height="60px" width="60px" /></a>
+<a href="https://www.instagram.com/jhonyaraujo_oficial/"><img src="https://raw.githubusercontent.com/jhony2488/images/master/instagram.png" height="60px" width="60px" /></a>
 <a href="https://api.whatsapp.com/send?phone=5581983708177"><img src="https://raw.githubusercontent.com/jhony2488/images/master/whatsapp.png" height="60px" width="60px" /></a>
 <a href="https://www.behance.net/jhonyaraujo"><img src="https://raw.githubusercontent.com/jhony2488/images/master/behance.png" height="60px" width="60px" /></a>
 
